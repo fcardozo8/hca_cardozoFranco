@@ -1,9 +1,9 @@
 package com.andinos.hca.controller;
 
 import com.andinos.hca.model.entity.Carrito;
-import com.andinos.hca.model.service.CarritoServiceImpl;
+import com.andinos.hca.model.service.ICarritoService;
 import com.andinos.hca.model.service.IItemProductoService;
-import com.andinos.hca.model.service.UsuarioServiceImpl;
+import com.andinos.hca.model.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,29 +17,25 @@ public class CarritoController {
     private IItemProductoService itemProductoService;
 
     @Autowired
-    private CarritoServiceImpl carritoService;
+    private ICarritoService carritoService;
 
     @Autowired
-    private UsuarioServiceImpl usuarioService;
+    private IUsuarioService usuarioService;
 
     @GetMapping
-    public  ResponseEntity<?> getItems(@RequestParam Long idUsuario){
+    public ResponseEntity<?> getItems(@RequestParam Long idUsuario) {
         Carrito carrito = carritoService.findCarrito(idUsuario);
-        return new ResponseEntity<>(carrito, HttpStatus.FOUND);
+        return new ResponseEntity<>(carrito, HttpStatus.OK);
     }
 
     @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Carrito> save(@RequestBody Carrito carrito){
+    public ResponseEntity<Carrito> save(@RequestBody Carrito carrito) {
         return new ResponseEntity<>(carritoService.save(carrito), HttpStatus.CREATED);
     }
 
-
-    @DeleteMapping(value = "/{idItem}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteItem(@PathVariable("idItem") Long id) {
+    @DeleteMapping("/{idItem}")
+    public ResponseEntity<?> deleteItem(@PathVariable("idItem") Long id) {
         itemProductoService.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
-
 }
