@@ -35,17 +35,17 @@ public class UsuarioServiceImplTest {
 
     @Test
     public void testFindAll() {
-        // Configuración de prueba
+
         List<Usuario> usuarios = new ArrayList<>();
-        usuarios.add(new Usuario());  // Añadir usuarios ficticios
+        usuarios.add(new Usuario());
         when(usuarioDao.findAll()).thenReturn(usuarios);
 
-        // Ejecución
-        List<Usuario> result = (List<Usuario>) usuarioService.findAll();  // Realiza un cast explícito a List<Usuario>
 
-        // Verificación
+        List<Usuario> result = (List<Usuario>) usuarioService.findAll();
+
+
         assertNotNull(result);
-        assertEquals(1, result.size());  // Verifica que la lista contiene un usuario
+        assertEquals(1, result.size());
         verify(usuarioDao, times(1)).findAll();
     }
 
