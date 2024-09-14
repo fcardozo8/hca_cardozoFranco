@@ -21,7 +21,7 @@ public class TestItemProducto {
 
         ItemProducto itemProducto = new ItemProducto();
         itemProducto.setProducto(producto);
-        itemProducto.setCarrito(carrito);
+       /* itemProducto.setCarrito(carrito);*/
         itemProducto.setCantidad(1);
 
         ItemProducto guardado = itemProductoDAO.save(itemProducto);
